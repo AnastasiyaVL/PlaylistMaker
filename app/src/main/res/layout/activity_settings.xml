@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+        app:navigationIcon="@drawable/ic_back_arrow_24"
+        app:title="@string/settings_title"
+        app:titleTextColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_settings">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/padding_screen"
+            android:text="@string/dark_theme"
+            android:textColor="@color/black"
+            android:textSize="@dimen/settings_text_size" />
+
+        <Switch
+            android:id="@+id/darkThemeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:thumbTint="@color/switch_thumb"
+            android:trackTint="@color/switch_track"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_settings">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/padding_screen"
+            android:text="@string/share_app"
+            android:textColor="@color/black"
+            android:textSize="@dimen/settings_text_size" />
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/margin_settings_icon"
+            android:src="@drawable/ic_share_24" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_settings">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/padding_screen"
+            android:text="@string/support_email"
+            android:textColor="@color/black"
+            android:textSize="@dimen/settings_text_size" />
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/margin_settings_icon"
+            android:src="@drawable/ic_support_24" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_settings">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/padding_screen"
+            android:text="@string/terms_of_use"
+            android:textColor="@color/black"
+            android:textSize="@dimen/settings_text_size" />
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/margin_settings_icon"
+            android:src="@drawable/ic_forward_arrow_24" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
