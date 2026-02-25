@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-        app:navigationIcon="@drawable/arrow_back_icon"
+        app:navigationIcon="@drawable/ic_back_arrow_24"
         app:title="@string/settings_title"
         app:titleTextColor="@color/black" />
 
@@ -41,7 +41,7 @@
             android:id="@+id/darkThemeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             android:thumbTint="@color/switch_thumb"
             android:trackTint="@color/switch_track"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -67,10 +67,10 @@
             android:textSize="@dimen/settings_text_size" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="@dimen/margin_settings_icon"
-            android:src="@drawable/share_icon" />
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/margin_settings_icon"
+            android:src="@drawable/ic_share_24" />
 
     </LinearLayout>
 
@@ -93,10 +93,10 @@
             android:textSize="@dimen/settings_text_size" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="@dimen/margin_settings_icon"
-            android:src="@drawable/support_icon" />
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/margin_settings_icon"
+            android:src="@drawable/ic_support_24" />
 
     </LinearLayout>
 
@@ -121,10 +121,10 @@
             android:textSize="@dimen/settings_text_size" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="@dimen/margin_settings_icon"
-            android:src="@drawable/arrow_forward_icon" />
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/margin_settings_icon"
+            android:src="@drawable/ic_forward_arrow_24" />
 
     </LinearLayout>
 
