@@ -1,44 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/settingsMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
-    android:orientation="vertical"
-    android:theme="@style/Theme.PlaylistMaker">
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <com.google.android.material.appbar.MaterialToolbar
+
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:navigationIcon="@drawable/ic_back_arrow_24"
-        app:navigationIconTint="?attr/colorOnPrimary"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+        app:navigationIcon="@drawable/arrow_back_icon"
         app:title="@string/settings_title"
-        app:titleTextColor="?attr/colorOnPrimary" />
+        app:titleTextColor="@color/black" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/darkThemeSwitch"
-        style="@style/SettingsSwitchStyle"
-        android:text="@string/dark_theme" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_settings">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/shareTextView"
-        style="@style/SettingsMenuItemStyle"
-        android:drawableEnd="@drawable/ic_share_24"
-        android:text="@string/share_app" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/padding_screen"
+            android:text="@string/dark_theme"
+            android:textColor="@color/black"
+            android:textSize="@dimen/settings_text_size" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/supportTextView"
-        style="@style/SettingsMenuItemStyle"
-        android:drawableEnd="@drawable/ic_support_24"
-        android:text="@string/support_email" />
+        <Switch
+            android:id="@+id/darkThemeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6dp"
+            android:thumbTint="@color/switch_thumb"
+            android:trackTint="@color/switch_track"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/termsTextView"
-        style="@style/SettingsMenuItemStyle"
-        android:drawableEnd="@drawable/ic_forward_arrow_24"
-        android:text="@string/terms_of_use" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_settings">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/padding_screen"
+            android:text="@string/share_app"
+            android:textColor="@color/black"
+            android:textSize="@dimen/settings_text_size" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="@dimen/margin_settings_icon"
+            android:src="@drawable/share_icon" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_settings">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/padding_screen"
+            android:text="@string/support_email"
+            android:textColor="@color/black"
+            android:textSize="@dimen/settings_text_size" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="@dimen/margin_settings_icon"
+            android:src="@drawable/support_icon" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_settings">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/padding_screen"
+            android:text="@string/terms_of_use"
+            android:textColor="@color/black"
+            android:textSize="@dimen/settings_text_size" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="@dimen/margin_settings_icon"
+            android:src="@drawable/arrow_forward_icon" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
