@@ -12,7 +12,7 @@ class SettingsActivity : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
 
-        toolbar.setNavigationIcon(R.drawable.arrow_back_icon)
+        toolbar.setNavigationIcon(R.drawable.ic_back_arrow_24)
         toolbar.setNavigationOnClickListener {
             finish()
         }

@@ -28,7 +28,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_button"
         app:cornerRadius="@dimen/button_corner_radius"
-        app:icon="@drawable/search_icon"
+        app:icon="@drawable/ic_search_24"
         app:iconGravity="textStart"
         app:iconPadding="@dimen/padding_icon"
         app:iconTint="@color/black" />
@@ -45,7 +45,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_button"
         app:cornerRadius="@dimen/button_corner_radius"
-        app:icon="@drawable/media_icon"
+        app:icon="@drawable/ic_media_24"
         app:iconGravity="textStart"
         app:iconPadding="@dimen/padding_icon"
         app:iconTint="@color/black" />
@@ -62,7 +62,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_button"
         app:cornerRadius="@dimen/button_corner_radius"
-        app:icon="@drawable/settings_icon"
+        app:icon="@drawable/ic_settings_24"
         app:iconGravity="textStart"
         app:iconPadding="@dimen/padding_icon"
         app:iconTint="@color/black" />
