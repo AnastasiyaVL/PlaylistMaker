@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="@dimen/padding_screen"
+            android:paddingStart="@dimen/padding_screen"
             android:text="@string/dark_theme"
             android:textColor="@color/black"
             android:textSize="@dimen/settings_text_size" />
@@ -41,7 +41,7 @@
             android:id="@+id/darkThemeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="6dp"
+            android:layout_marginStart="6dp"
             android:thumbTint="@color/switch_thumb"
             android:trackTint="@color/switch_track"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -61,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="@dimen/padding_screen"
+            android:paddingStart="@dimen/padding_screen"
             android:text="@string/share_app"
             android:textColor="@color/black"
             android:textSize="@dimen/settings_text_size" />
@@ -69,7 +69,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginRight="@dimen/margin_settings_icon"
+            android:layout_marginStart="@dimen/margin_settings_icon"
             android:src="@drawable/share_icon" />
 
     </LinearLayout>
@@ -87,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="@dimen/padding_screen"
+            android:paddingStart="@dimen/padding_screen"
             android:text="@string/support_email"
             android:textColor="@color/black"
             android:textSize="@dimen/settings_text_size" />
@@ -95,7 +95,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginRight="@dimen/margin_settings_icon"
+            android:layout_marginStart="@dimen/margin_settings_icon"
             android:src="@drawable/support_icon" />
 
     </LinearLayout>
@@ -115,7 +115,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="@dimen/padding_screen"
+            android:paddingStart="@dimen/padding_screen"
             android:text="@string/terms_of_use"
             android:textColor="@color/black"
             android:textSize="@dimen/settings_text_size" />
@@ -123,7 +123,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginRight="@dimen/margin_settings_icon"
+            android:layout_marginStart="@dimen/margin_settings_icon"
             android:src="@drawable/arrow_forward_icon" />
 
     </LinearLayout>
