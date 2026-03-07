@@ -127,3 +127,4 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 }
+
