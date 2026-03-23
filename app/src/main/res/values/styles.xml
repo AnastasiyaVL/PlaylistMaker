@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="TitleToolbarStyle">
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:textFontWeight">500</item>
+    </style>
+
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -18,35 +24,30 @@
         <item name="android:layout_weight">1</item>
     </style>
 
-    <style name="SettingsLinearLayoutStyle">
+
+    <style name="SettingsMenuItemStyle" parent="Widget.MaterialComponents.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:paddingVertical">20dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:paddingVertical">@dimen/padding_settings</item>
-        <item name="android:background">?attr/colorSurface</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="drawableTint">?attr/colorControlNormal</item>
     </style>
 
-    <style name="SettingsTextStyle">
-        <item name="android:layout_width">0dp</item>
+    <style name="SettingsSwitchStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:paddingStart">@dimen/padding_screen</item>
-        <item name="android:textSize">@dimen/settings_text_size</item>
-        <item name="android:textColor">?attr/colorOnSurface</item>
-    </style>
-
-    <style name="SwitchStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
-        <item name="android:trackTint">@color/switch_track</item>
-        <item name="android:thumbTint">@color/switch_thumb</item>
-    </style>
-
-    <style name="IconStyle">
-        <item name="android:layout_width">@dimen/icon_size</item>
-        <item name="android:layout_height">@dimen/icon_size</item>
-        <item name="android:layout_marginEnd">@dimen/margin_settings_icon</item>
-        <item name="tint">?attr/colorControlNormal</item>item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:paddingVertical">20dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="trackTint">@color/switch_track</item>
+        <item name="thumbTint">@color/switch_thumb</item>
     </style>
 </resources>

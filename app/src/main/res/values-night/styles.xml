@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="SwitchStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
-        <item name="android:trackTint">@color/yp_blue_light</item>
-        <item name="android:thumbTint">@color/yp_blue</item>
+    <style name="SettingsSwitchStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:paddingVertical">20dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="trackTint">@color/yp_blue_light</item>
+        <item name="thumbTint">@color/yp_blue</item>
     </style>
 </resources>

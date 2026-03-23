@@ -1,40 +1,48 @@
 package com.example.playlistmaker
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.widget.LinearLayout
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.net.toUri
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import com.google.android.material.textview.MaterialTextView
 
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_settings)
 
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        toolbar.setNavigationIcon(R.drawable.ic_back_arrow_24)
-        toolbar.setNavigationOnClickListener {
-            finish()
+        val settingsMain = findViewById<LinearLayout>(R.id.settingsMain)
+        ViewCompat.setOnApplyWindowInsetsListener(settingsMain) { view, insets ->
+            val statusBar = insets.getInsets(WindowInsetsCompat.Type.statusBars())
+            val navigationBar = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            view.updatePadding(
+                top = statusBar.top,
+                bottom = navigationBar.bottom
+            )
+            insets
         }
 
-        val shareLayout = findViewById<LinearLayout>(R.id.shareLayout)
-        val supportLayout = findViewById<LinearLayout>(R.id.supportLayout)
-        val termsLayout = findViewById<LinearLayout>(R.id.termsLayout)
+        val shareTextView = findViewById<MaterialTextView>(R.id.shareTextView)
+        val supportTextView = findViewById<MaterialTextView>(R.id.supportTextView)
+        val termsTextView = findViewById<MaterialTextView>(R.id.termsTextView)
 
 
-        shareLayout.setOnClickListener {
+        shareTextView.setOnClickListener {
             shareApp()
         }
 
-        supportLayout.setOnClickListener {
+        supportTextView.setOnClickListener {
             writeToSupport()
         }
 
-        termsLayout.setOnClickListener {
+        termsTextView.setOnClickListener {
             openTermsOfUse()
         }
     }
@@ -49,7 +57,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun writeToSupport() {
         val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-            data = "mailto:".toUri() // Только mailto, без адреса
+            data = "mailto:".toUri()
             putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.support_email_address)))
             putExtra(Intent.EXTRA_SUBJECT, getString(R.string.support_email_subject))
             putExtra(Intent.EXTRA_TEXT, getString(R.string.support_email_text))
