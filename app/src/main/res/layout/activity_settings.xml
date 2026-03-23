@@ -5,128 +5,42 @@
     android:id="@+id/settingsMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical"
+    android:theme="@style/Theme.PlaylistMaker">
 
-
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
         app:navigationIcon="@drawable/ic_back_arrow_24"
+        app:navigationIconTint="?attr/colorOnPrimary"
         app:title="@string/settings_title"
-        app:titleTextColor="@color/black" />
+        app:titleTextColor="?attr/colorOnPrimary" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingVertical="@dimen/padding_settings">
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/darkThemeSwitch"
+        style="@style/SettingsSwitchStyle"
+        android:text="@string/dark_theme"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="@dimen/padding_screen"
-            android:text="@string/dark_theme"
-            android:textColor="@color/black"
-            android:textSize="@dimen/settings_text_size" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/shareTextView"
+        style="@style/SettingsMenuItemStyle"
+        android:drawableEnd="@drawable/ic_share_24"
+        android:text="@string/share_app" />
 
-        <Switch
-            android:id="@+id/darkThemeSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
-            android:thumbTint="@color/switch_thumb"
-            android:trackTint="@color/switch_track"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/supportTextView"
+        style="@style/SettingsMenuItemStyle"
+        android:drawableEnd="@drawable/ic_support_24"
+        android:text="@string/support_email" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingVertical="@dimen/padding_settings">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="@dimen/padding_screen"
-            android:text="@string/share_app"
-            android:textColor="@color/black"
-            android:textSize="@dimen/settings_text_size" />
-
-        <ImageView
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginEnd="@dimen/margin_settings_icon"
-            android:src="@drawable/ic_share_24" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingVertical="@dimen/padding_settings">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="@dimen/padding_screen"
-            android:text="@string/support_email"
-            android:textColor="@color/black"
-            android:textSize="@dimen/settings_text_size" />
-
-        <ImageView
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginEnd="@dimen/margin_settings_icon"
-            android:src="@drawable/ic_support_24" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingVertical="@dimen/padding_settings">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="@dimen/padding_screen"
-            android:text="@string/terms_of_use"
-            android:textColor="@color/black"
-            android:textSize="@dimen/settings_text_size" />
-
-        <ImageView
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginEnd="@dimen/margin_settings_icon"
-            android:src="@drawable/ic_forward_arrow_24" />
-
-    </LinearLayout>
-
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/termsTextView"
+        style="@style/SettingsMenuItemStyle"
+        android:drawableEnd="@drawable/ic_forward_arrow_24"
+        android:text="@string/terms_of_use" />
 
 </LinearLayout>
