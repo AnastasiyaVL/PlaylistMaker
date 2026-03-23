@@ -9,7 +9,6 @@
         <item name="colorOnSecondary">@color/yp_white</item>
 
         <item name="colorSurface">@color/yp_white</item>
-        <item name="colorOnSurface">@color/yp_black</item>
 
         <item name="colorControlNormal">@color/yp_text_gray</item>
         <item name="colorSearchBackground">@color/yp_light_gray</item>
