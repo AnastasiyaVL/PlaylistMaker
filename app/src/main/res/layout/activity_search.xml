@@ -50,8 +50,8 @@
             android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="14dp"
             android:src="@drawable/ic_clear_12"
-            app:tint="?attr/colorSearchIcon"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:tint="?attr/colorSearchIcon" />
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -71,23 +71,9 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <FrameLayout
-            android:layout_width="@dimen/search_errors_im"
-            android:layout_height="@dimen/search_errors_im">
-
-            <ImageView
-                style="@style/NoteBackStyle"
-                android:src="@drawable/ic_note_back" />
-
-            <ImageView
-                style="@style/PlaceholderCenterIconStyle"
-                android:src="@drawable/ic_smile" />
-
-            <ImageView
-                style="@style/NoteFrontStyle"
-                android:src="@drawable/ic_note_front" />
-
-        </FrameLayout>
+        <ImageView
+            style="@style/PlaceholderImageStyle"
+            android:src="@drawable/search_error" />
 
         <TextView
             style="@style/PlaceholderTitleStyle"
@@ -102,23 +88,9 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <FrameLayout
-            android:layout_width="@dimen/search_errors_im"
-            android:layout_height="@dimen/search_errors_im">
-
-            <ImageView
-                style="@style/NoteBackStyle"
-                android:src="@drawable/ic_note_back" />
-
-            <ImageView
-                style="@style/PlaceholderCenterIconStyle"
-                android:src="@drawable/ic_wifi" />
-
-            <ImageView
-                style="@style/NoteFrontStyle"
-                android:src="@drawable/ic_note_front" />
-
-        </FrameLayout>
+        <ImageView
+            style="@style/PlaceholderImageStyle"
+            android:src="@drawable/wifi_error" />
 
         <TextView
             style="@style/PlaceholderTitleStyle"

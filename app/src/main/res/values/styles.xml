@@ -61,26 +61,10 @@
         <item name="android:fontFamily">@font/ys_display_medium</item>
     </style>
 
-    <style name="NoteBackStyle">
-        <item name="android:layout_width">102dp</item>
-        <item name="android:layout_height">94dp</item>
-        <item name="android:layout_marginStart">9dp</item>
-        <item name="android:layout_marginTop">3dp</item>
-        <item name="android:tint">?attr/colorControlNormal</item>
+    <style name="PlaceholderImageStyle">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
-    <style name="NoteFrontStyle">
-        <item name="android:layout_width">31dp</item>
-        <item name="android:layout_height">110dp</item>
-        <item name="android:layout_marginStart">80dp</item>
-        <item name="android:layout_marginTop">6dp</item>
-        <item name="android:tint">?attr/colorControlNormal</item>
-    </style>
-
-    <style name="PlaceholderCenterIconStyle">
-        <item name="android:layout_width">69dp</item>
-        <item name="android:layout_height">69dp</item>
-        <item name="android:layout_marginStart">37dp</item>
-        <item name="android:layout_marginTop">28dp</item>
-    </style>
 </resources>
