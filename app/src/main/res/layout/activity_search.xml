@@ -34,10 +34,11 @@
             android:drawablePadding="8dp"
             android:drawableTint="?attr/colorSearchIcon"
             android:hint="@string/search_hint"
-            android:imeOptions="actionSearch"
+            android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLines="1"
             android:paddingStart="@dimen/padding_screen"
+            android:singleLine="true"
             android:textColor="@color/yp_black"
             android:textColorHint="?attr/colorSearchIcon"
             android:textSize="@dimen/settings_text_size" />
@@ -58,7 +59,86 @@
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/emptyPlaceholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
 
+        <FrameLayout
+            android:layout_width="@dimen/search_errors_im"
+            android:layout_height="@dimen/search_errors_im">
+
+            <ImageView
+                style="@style/NoteBackStyle"
+                android:src="@drawable/ic_note_back" />
+
+            <ImageView
+                style="@style/PlaceholderCenterIconStyle"
+                android:src="@drawable/ic_smile" />
+
+            <ImageView
+                style="@style/NoteFrontStyle"
+                android:src="@drawable/ic_note_front" />
+
+        </FrameLayout>
+
+        <TextView
+            style="@style/PlaceholderTitleStyle"
+            android:text="@string/nothing_found" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/errorPlaceholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:layout_width="@dimen/search_errors_im"
+            android:layout_height="@dimen/search_errors_im">
+
+            <ImageView
+                style="@style/NoteBackStyle"
+                android:src="@drawable/ic_note_back" />
+
+            <ImageView
+                style="@style/PlaceholderCenterIconStyle"
+                android:src="@drawable/ic_wifi" />
+
+            <ImageView
+                style="@style/NoteFrontStyle"
+                android:src="@drawable/ic_note_front" />
+
+        </FrameLayout>
+
+        <TextView
+            style="@style/PlaceholderTitleStyle"
+            android:text="@string/connection_error_title" />
+
+        <TextView
+            style="@style/PlaceholderTitleStyle"
+            android:layout_width="312dp"
+            android:text="@string/connection_error_message" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/retryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="?attr/colorOnSurface"
+            android:fontFamily="@font/ys_display_medium"
+            android:text="@string/retry_button"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorSurface"
+            app:cornerRadius="54dp" />
+    </LinearLayout>
+
+</LinearLayout>
