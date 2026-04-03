@@ -24,7 +24,6 @@ class TrackAdapter(private val tracks: List<Track>) :
 
     override fun getItemCount(): Int = tracks.size
 
-    // TrackViewHolder внутри TrackAdapter
     class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val artworkImageView: ImageView = itemView.findViewById(R.id.artworkImageView)
@@ -32,12 +31,13 @@ class TrackAdapter(private val tracks: List<Track>) :
         private val artistName: TextView = itemView.findViewById(R.id.artistName)
         private val trackTime: TextView = itemView.findViewById(R.id.trackTime)
 
+        private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
+
         fun bind(track: Track) {
             trackName.text = track.trackName
             artistName.text = track.artistName
 
-            val duration = SimpleDateFormat("mm:ss", Locale.getDefault())
-                .format(track.trackTimeMillis)
+            val duration = dateFormat.format(track.trackTimeMillis)
             trackTime.text = duration
 
             Glide.with(itemView.context)
