@@ -145,6 +145,7 @@ class SearchActivity : AppCompatActivity() {
         }
 
         searchEditText.requestFocus()
+        showKeyboard()
         showHistory()
     }
 
