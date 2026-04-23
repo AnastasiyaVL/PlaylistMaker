@@ -13,5 +13,6 @@
         <item name="colorControlNormal">@color/yp_white</item>
         <item name="colorSearchBackground">@color/yp_white</item>
         <item name="colorSearchIcon">@color/yp_black</item>
+        <item name="colorArrow">@color/yp_white</item>
     </style>
 </resources>

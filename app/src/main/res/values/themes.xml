@@ -10,9 +10,9 @@
 
         <item name="colorSurface">@color/yp_white</item>
 
-        <item name="colorControlNormal">@color/yp_text_gray</item>
+        <item name="colorControlNormal">@color/yp_black</item>
         <item name="colorSearchBackground">@color/yp_light_gray</item>
         <item name="colorSearchIcon">@color/yp_text_gray</item>
-
+        <item name="colorArrow">@color/yp_text_gray</item>
     </style>
 </resources>
