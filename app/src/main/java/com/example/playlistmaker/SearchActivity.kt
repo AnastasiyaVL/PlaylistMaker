@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -27,15 +28,13 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var toolbar: MaterialToolbar
     private lateinit var searchEditText: EditText
     private lateinit var clearIcon: ImageView
-    private lateinit var trackRecyclerView: RecyclerView
-    private lateinit var trackAdapter: TrackAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: TrackAdapter
     private lateinit var emptyPlaceholder: LinearLayout
     private lateinit var errorPlaceholder: LinearLayout
     private lateinit var retryButton: MaterialButton
-    private lateinit var historyLayout: LinearLayout
-    private lateinit var historyRecyclerView: RecyclerView
+    private lateinit var historyTitle: TextView
     private lateinit var clearHistoryButton: MaterialButton
-    private lateinit var historyAdapter: TrackAdapter
 
     private var tracks = mutableListOf<Track>()
     private var searchText: String = ""
@@ -68,23 +67,17 @@ class SearchActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         searchEditText = findViewById(R.id.searchEditText)
         clearIcon = findViewById(R.id.clearIcon)
-        trackRecyclerView = findViewById(R.id.trackRecyclerView)
+        recyclerView = findViewById(R.id.recyclerView)
         emptyPlaceholder = findViewById(R.id.emptyPlaceholder)
         errorPlaceholder = findViewById(R.id.errorPlaceholder)
         retryButton = findViewById(R.id.retryButton)
-        historyLayout = findViewById(R.id.historyLayout)
-        historyRecyclerView = findViewById(R.id.historyRecyclerView)
+        historyTitle = findViewById(R.id.historyTitle)
         clearHistoryButton = findViewById(R.id.clearHistoryButton)
 
-        trackAdapter = TrackAdapter(tracks) { track ->
+        adapter = TrackAdapter(mutableListOf()) { track ->
             onTrackClick(track)
         }
-        trackRecyclerView.adapter = trackAdapter
-
-        historyAdapter = TrackAdapter(mutableListOf()) { track ->
-            onTrackClick(track)
-        }
-        historyRecyclerView.adapter = historyAdapter
+        recyclerView.adapter = adapter
 
         toolbar.setNavigationOnClickListener {
             finish()
@@ -104,9 +97,9 @@ class SearchActivity : AppCompatActivity() {
             searchText = ""
             clearIcon.isVisible = false
             hideKeyboard()
-            showHistory()
             tracks.clear()
-            trackAdapter.updateTracks(tracks)
+            adapter.updateTracks(tracks)
+            showHistory()
         }
 
         searchEditText.addTextChangedListener(object : TextWatcher {
@@ -150,6 +143,9 @@ class SearchActivity : AppCompatActivity() {
             searchHistory.clearHistory()
             showHistory()
         }
+
+        searchEditText.requestFocus()
+        showHistory()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -168,7 +164,6 @@ class SearchActivity : AppCompatActivity() {
                     if (trackResponse != null && trackResponse.results.isNotEmpty()) {
                         tracks.clear()
                         tracks.addAll(trackResponse.results)
-                        trackAdapter.updateTracks(tracks)
                         showRecyclerView()
                     } else {
                         showEmptyPlaceholder()
@@ -187,13 +182,16 @@ class SearchActivity : AppCompatActivity() {
     private fun showHistory() {
         val history = searchHistory.getHistory()
         if (history.isNotEmpty() && searchEditText.text.isEmpty() && searchEditText.hasFocus()) {
-            historyAdapter.updateTracks(history)
-            historyLayout.visibility = View.VISIBLE
-            trackRecyclerView.visibility = View.GONE
+            adapter.updateTracks(history)
+            historyTitle.visibility = View.VISIBLE
+            clearHistoryButton.visibility = View.VISIBLE
+            recyclerView.visibility = View.VISIBLE
             emptyPlaceholder.visibility = View.GONE
             errorPlaceholder.visibility = View.GONE
         } else {
-            historyLayout.visibility = View.GONE
+            historyTitle.visibility = View.GONE
+            clearHistoryButton.visibility = View.GONE
+            recyclerView.visibility = View.GONE
         }
     }
 
@@ -208,34 +206,40 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun showLoading() {
-        historyLayout.visibility = View.GONE
-        trackRecyclerView.visibility = View.GONE
+        historyTitle.visibility = View.GONE
+        clearHistoryButton.visibility = View.GONE
+        recyclerView.visibility = View.GONE
         emptyPlaceholder.visibility = View.GONE
         errorPlaceholder.visibility = View.GONE
     }
 
     private fun showRecyclerView() {
-        trackRecyclerView.visibility = View.VISIBLE
+        adapter.updateTracks(tracks)
+        historyTitle.visibility = View.GONE
+        clearHistoryButton.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
         emptyPlaceholder.visibility = View.GONE
         errorPlaceholder.visibility = View.GONE
-        historyLayout.visibility = View.GONE
     }
 
     private fun showEmptyPlaceholder() {
-        trackRecyclerView.visibility = View.GONE
+        historyTitle.visibility = View.GONE
+        clearHistoryButton.visibility = View.GONE
+        recyclerView.visibility = View.GONE
         emptyPlaceholder.visibility = View.VISIBLE
         errorPlaceholder.visibility = View.GONE
-        historyLayout.visibility = View.GONE
     }
 
     private fun showErrorPlaceholder() {
-        trackRecyclerView.visibility = View.GONE
+        historyTitle.visibility = View.GONE
+        clearHistoryButton.visibility = View.GONE
+        recyclerView.visibility = View.GONE
         emptyPlaceholder.visibility = View.GONE
         errorPlaceholder.visibility = View.VISIBLE
-        historyLayout.visibility = View.GONE
     }
 
     private fun onTrackClick(track: Track) {
         searchHistory.addTrack(track)
     }
 }
+
