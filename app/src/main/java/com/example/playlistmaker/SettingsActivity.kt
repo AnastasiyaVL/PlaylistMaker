@@ -9,9 +9,12 @@ import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textview.MaterialTextView
 
 class SettingsActivity : AppCompatActivity() {
+
+    private lateinit var darkThemeSwitch: SwitchMaterial
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +32,20 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
         val shareTextView = findViewById<MaterialTextView>(R.id.shareTextView)
         val supportTextView = findViewById<MaterialTextView>(R.id.supportTextView)
         val termsTextView = findViewById<MaterialTextView>(R.id.termsTextView)
+        darkThemeSwitch = findViewById(R.id.darkThemeSwitch)
 
+        darkThemeSwitch.isChecked = (applicationContext as App).darkTheme
+
+        darkThemeSwitch.setOnCheckedChangeListener { _, checked ->
+            (applicationContext as App).switchTheme(checked)
+        }
 
         shareTextView.setOnClickListener {
             shareApp()

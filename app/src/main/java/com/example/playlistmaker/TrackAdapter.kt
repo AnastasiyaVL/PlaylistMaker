@@ -10,8 +10,10 @@ import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class TrackAdapter(private val tracks: List<Track>) :
-    RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
+class TrackAdapter(
+    private var tracks: List<Track>,
+    private val onItemClick: ((Track) -> Unit)? = null
+) : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_track, parent, false)
@@ -19,10 +21,19 @@ class TrackAdapter(private val tracks: List<Track>) :
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
-        holder.bind(tracks[position])
+        val track = tracks[position]
+        holder.bind(track)
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(track)
+        }
     }
 
     override fun getItemCount(): Int = tracks.size
+
+    fun updateTracks(newTracks: List<Track>) {
+        tracks = newTracks
+        notifyDataSetChanged()
+    }
 
     class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -36,10 +47,8 @@ class TrackAdapter(private val tracks: List<Track>) :
         fun bind(track: Track) {
             trackName.text = track.trackName
             artistName.text = track.artistName
-
             val duration = dateFormat.format(track.trackTimeMillis)
             trackTime.text = duration
-
             Glide.with(itemView.context)
                 .load(track.artworkUrl100)
                 .placeholder(R.drawable.placeholder)
