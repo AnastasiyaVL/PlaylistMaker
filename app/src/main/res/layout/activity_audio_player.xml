@@ -137,7 +137,12 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/currentTimeTextView">
 
-            <LinearLayout style="@style/PlayerRowStyle">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
@@ -162,7 +167,13 @@
 
             <LinearLayout
                 android:id="@+id/albumLayout"
-                style="@style/PlayerRowStyle">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <TextView
                     android:layout_width="0dp"
@@ -189,7 +200,13 @@
 
             <LinearLayout
                 android:id="@+id/yearLayout"
-                style="@style/PlayerRowStyle">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <TextView
                     android:layout_width="0dp"
@@ -212,7 +229,12 @@
                     tools:text="1965" />
             </LinearLayout>
 
-            <LinearLayout style="@style/PlayerRowStyle">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
@@ -235,7 +257,12 @@
                     tools:text="Rock" />
             </LinearLayout>
 
-            <LinearLayout style="@style/PlayerRowStyle">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"

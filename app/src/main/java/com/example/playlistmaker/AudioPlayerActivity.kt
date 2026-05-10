@@ -1,10 +1,6 @@
 package com.example.playlistmaker
 
-import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -16,10 +12,6 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class AudioPlayerActivity : AppCompatActivity() {
-
-    companion object {
-        const val TRACK_KEY = "track"
-    }
 
     private lateinit var toolbar: MaterialToolbar
     private lateinit var coverImageView: ImageView
@@ -33,27 +25,8 @@ class AudioPlayerActivity : AppCompatActivity() {
     private lateinit var genreTextView: TextView
     private lateinit var countryTextView: TextView
     private lateinit var currentTimeTextView: TextView
-    private lateinit var playButton: ImageButton
-
-    private var mediaPlayer: MediaPlayer? = null
-    private val handler = Handler(Looper.getMainLooper())
-    private var isPlaying = false
-    private var currentTrack: Track? = null
 
     private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
-
-    private val updateTimeRunnable = object : Runnable {
-        override fun run() {
-            mediaPlayer?.let {
-                if (it.isPlaying) {
-                    val currentPosition = it.currentPosition
-                    currentTimeTextView.text =
-                        SimpleDateFormat("mm:ss", Locale.getDefault()).format(currentPosition)
-                    handler.postDelayed(this, 500)
-                }
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,101 +44,16 @@ class AudioPlayerActivity : AppCompatActivity() {
         genreTextView = findViewById(R.id.genreTextView)
         countryTextView = findViewById(R.id.countryTextView)
         currentTimeTextView = findViewById(R.id.currentTimeTextView)
-        playButton = findViewById(R.id.playButton)
 
         toolbar.setNavigationOnClickListener {
-            releaseMediaPlayer()
             finish()
         }
 
-        playButton.setOnClickListener {
-            togglePlayback()
-        }
+        val track = intent.getSerializableExtra("track") as? Track
 
-        val track =
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                intent.getParcelableExtra(TRACK_KEY, Track::class.java)
-            } else {
-                @Suppress("DEPRECATION")
-                intent.getParcelableExtra(TRACK_KEY)
-            }
-
-        currentTrack = track
         if (track != null) {
             displayTrackInfo(track)
-            setupMediaPlayer(track.previewUrl)
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        pausePlayback()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        releaseMediaPlayer()
-        handler.removeCallbacks(updateTimeRunnable)
-    }
-
-    private fun setupMediaPlayer(previewUrl: String?) {
-        if (previewUrl.isNullOrEmpty()) {
-            playButton.isEnabled = false
-            return
-        }
-
-        mediaPlayer = MediaPlayer().apply {
-            setDataSource(previewUrl)
-            prepareAsync()
-            setOnPreparedListener {
-                playButton.isEnabled = true
-                durationTextView.text = dateFormat.format(it.duration)
-            }
-            setOnCompletionListener {
-                resetPlaybackState()
-            }
-        }
-    }
-
-    private fun togglePlayback() {
-        if (isPlaying) {
-            pausePlayback()
-        } else {
-            startPlayback()
-        }
-    }
-
-    private fun startPlayback() {
-        mediaPlayer?.start()
-        isPlaying = true
-        playButton.setImageResource(R.drawable.ic_pause)
-        handler.post(updateTimeRunnable)
-    }
-
-    private fun pausePlayback() {
-        mediaPlayer?.pause()
-        isPlaying = false
-        playButton.setImageResource(R.drawable.ic_play)
-        handler.removeCallbacks(updateTimeRunnable)
-    }
-
-    private fun resetPlaybackState() {
-        isPlaying = false
-        playButton.setImageResource(R.drawable.ic_play)
-        handler.removeCallbacks(updateTimeRunnable)
-        mediaPlayer?.let {
-            if (it.isPlaying) {
-                it.pause()
-                it.seekTo(0)
-            }
-        }
-        currentTimeTextView.text = "00:00"
-    }
-
-    private fun releaseMediaPlayer() {
-        mediaPlayer?.release()
-        mediaPlayer = null
-        handler.removeCallbacks(updateTimeRunnable)
     }
 
     private fun displayTrackInfo(track: Track) {
@@ -199,6 +87,6 @@ class AudioPlayerActivity : AppCompatActivity() {
         genreTextView.text = track.primaryGenreName ?: "—"
         countryTextView.text = track.country ?: "—"
 
-        currentTimeTextView.text = "00:00"
+        currentTimeTextView.text = duration
     }
 }
