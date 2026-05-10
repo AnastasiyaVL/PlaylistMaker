@@ -13,6 +13,10 @@ import java.util.Locale
 
 class AudioPlayerActivity : AppCompatActivity() {
 
+    companion object {
+        const val TRACK_KEY = "track"
+    }
+
     private lateinit var toolbar: MaterialToolbar
     private lateinit var coverImageView: ImageView
     private lateinit var trackNameTextView: TextView
@@ -49,7 +53,11 @@ class AudioPlayerActivity : AppCompatActivity() {
             finish()
         }
 
-        val track = intent.getSerializableExtra("track") as? Track
+        val track = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(TRACK_KEY, Track::class.java)
+        } else {
+            intent.getParcelableExtra<Track>(TRACK_KEY)
+        }
 
         if (track != null) {
             displayTrackInfo(track)
