@@ -3,4 +3,5 @@
     <attr name="colorSearchBackground" format="color" />
     <attr name="colorSearchIcon" format="color" />
     <attr name="colorArrow" format="color" />
+    <attr name="colorIconButtonBackground" format="color" />
 </resources>
