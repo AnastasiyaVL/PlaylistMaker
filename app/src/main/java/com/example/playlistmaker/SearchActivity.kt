@@ -1,5 +1,6 @@
 package com.example.playlistmaker
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -241,6 +242,9 @@ class SearchActivity : AppCompatActivity() {
 
     private fun onTrackClick(track: Track) {
         searchHistory.addTrack(track)
+        val intent = Intent(this, AudioPlayerActivity::class.java)
+        intent.putExtra(AudioPlayerActivity.TRACK_KEY, track)
+        startActivity(intent)
     }
 }
 
