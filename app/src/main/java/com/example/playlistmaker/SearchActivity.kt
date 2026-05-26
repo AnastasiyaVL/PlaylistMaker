@@ -2,6 +2,7 @@ package com.example.playlistmaker
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -23,6 +24,8 @@ import com.google.android.material.button.MaterialButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.os.Looper
+import android.widget.ProgressBar
 
 class SearchActivity : AppCompatActivity() {
 
@@ -36,14 +39,19 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var retryButton: MaterialButton
     private lateinit var historyTitle: TextView
     private lateinit var clearHistoryButton: MaterialButton
+    private lateinit var progressBar: ProgressBar
 
     private var tracks = mutableListOf<Track>()
     private var searchText: String = ""
     private var lastQuery: String = ""
     private lateinit var searchHistory: SearchHistory
 
+    private val handler = Handler(Looper.getMainLooper())
+    private var searchRunnable: Runnable? = null
+
     companion object {
         private const val SEARCH_TEXT_KEY = "SEARCH_TEXT"
+        private const val SEARCH_DEBOUNCE_DELAY = 2000L
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +82,7 @@ class SearchActivity : AppCompatActivity() {
         retryButton = findViewById(R.id.retryButton)
         historyTitle = findViewById(R.id.historyTitle)
         clearHistoryButton = findViewById(R.id.clearHistoryButton)
+        progressBar = findViewById(R.id.progressBar)
 
         adapter = TrackAdapter(mutableListOf()) { track ->
             onTrackClick(track)
@@ -111,6 +120,9 @@ class SearchActivity : AppCompatActivity() {
                 clearIcon.isVisible = !s.isNullOrEmpty()
                 if (searchText.isEmpty()) {
                     showHistory()
+                    searchRunnable?.let { handler.removeCallbacks(it) }
+                } else {
+                    searchDebounce()
                 }
             }
 
@@ -126,6 +138,7 @@ class SearchActivity : AppCompatActivity() {
         searchEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 if (searchText.isNotEmpty()) {
+                    searchRunnable?.let { handler.removeCallbacks(it) }
                     searchTracks(searchText)
                 }
                 true
@@ -150,9 +163,24 @@ class SearchActivity : AppCompatActivity() {
         showHistory()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        searchRunnable?.let { handler.removeCallbacks(it) }
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(SEARCH_TEXT_KEY, searchText)
+    }
+
+    private fun searchDebounce() {
+        searchRunnable?.let { handler.removeCallbacks(it) }
+        searchRunnable = Runnable {
+            if (searchText.isNotEmpty()) {
+                searchTracks(searchText)
+            }
+        }
+        handler.postDelayed(searchRunnable!!, SEARCH_DEBOUNCE_DELAY)
     }
 
     private fun searchTracks(query: String) {
@@ -161,6 +189,7 @@ class SearchActivity : AppCompatActivity() {
 
         RetrofitClient.api.searchTracks(query).enqueue(object : Callback<TrackResponse> {
             override fun onResponse(call: Call<TrackResponse>, response: Response<TrackResponse>) {
+                showContent()
                 if (response.isSuccessful) {
                     val trackResponse = response.body()
                     if (trackResponse != null && trackResponse.results.isNotEmpty()) {
@@ -176,6 +205,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
+                showContent()
                 showErrorPlaceholder()
             }
         })
@@ -190,6 +220,7 @@ class SearchActivity : AppCompatActivity() {
             recyclerView.visibility = View.VISIBLE
             emptyPlaceholder.visibility = View.GONE
             errorPlaceholder.visibility = View.GONE
+            progressBar.visibility = View.GONE
         } else {
             historyTitle.visibility = View.GONE
             clearHistoryButton.visibility = View.GONE
@@ -208,11 +239,16 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun showLoading() {
+        progressBar.visibility = View.VISIBLE
         historyTitle.visibility = View.GONE
         clearHistoryButton.visibility = View.GONE
         recyclerView.visibility = View.GONE
         emptyPlaceholder.visibility = View.GONE
         errorPlaceholder.visibility = View.GONE
+    }
+
+    private fun showContent() {
+        progressBar.visibility = View.GONE
     }
 
     private fun showRecyclerView() {
@@ -247,4 +283,3 @@ class SearchActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
-

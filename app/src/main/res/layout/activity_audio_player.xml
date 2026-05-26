@@ -138,6 +138,7 @@
             app:layout_constraintTop_toBottomOf="@id/currentTimeTextView">
 
             <LinearLayout style="@style/PlayerRowStyle">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -212,6 +213,7 @@
             </LinearLayout>
 
             <LinearLayout style="@style/PlayerRowStyle">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -234,6 +236,7 @@
             </LinearLayout>
 
             <LinearLayout style="@style/PlayerRowStyle">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
