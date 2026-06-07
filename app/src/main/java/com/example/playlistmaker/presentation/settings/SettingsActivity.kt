@@ -1,4 +1,4 @@
-package com.example.playlistmaker
+package com.example.playlistmaker.presentation.settings
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,12 +9,19 @@ import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import com.example.playlistmaker.App
+import com.example.playlistmaker.R
+import com.example.playlistmaker.Creator
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textview.MaterialTextView
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var darkThemeSwitch: SwitchMaterial
+
+    private val getThemeSettingsInteractor by lazy { Creator.provideGetThemeSettingsInteractor() }
+    private val saveThemeSettingsInteractor by lazy { Creator.provideSaveThemeSettingsInteractor() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,19 +39,21 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
-        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.setNavigationOnClickListener {
             finish()
         }
+
         val shareTextView = findViewById<MaterialTextView>(R.id.shareTextView)
         val supportTextView = findViewById<MaterialTextView>(R.id.supportTextView)
         val termsTextView = findViewById<MaterialTextView>(R.id.termsTextView)
         darkThemeSwitch = findViewById(R.id.darkThemeSwitch)
 
-        darkThemeSwitch.isChecked = (applicationContext as App).darkTheme
+        darkThemeSwitch.isChecked = getThemeSettingsInteractor.execute()
 
         darkThemeSwitch.setOnCheckedChangeListener { _, checked ->
             (applicationContext as App).switchTheme(checked)
+            saveThemeSettingsInteractor.execute(checked)
         }
 
         shareTextView.setOnClickListener {
