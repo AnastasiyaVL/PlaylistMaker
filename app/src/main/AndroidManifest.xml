@@ -15,19 +15,19 @@
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
 
         <activity
-            android:name=".SearchActivity"
+            android:name=".presentation.search.SearchActivity"
             android:exported="false" />
 
         <activity
-            android:name=".LibraryActivity"
+            android:name=".presentation.library.LibraryActivity"
             android:exported="false" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".presentation.settings.SettingsActivity"
             android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +36,7 @@
         </activity>
 
         <activity
-            android:name=".AudioPlayerActivity"
+            android:name=".presentation.audio_player.AudioPlayerActivity"
             android:exported="false" />
 
     </application>
