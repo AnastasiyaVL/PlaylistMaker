@@ -7,27 +7,17 @@ class App : Application() {
 
     var darkTheme = false
 
-    companion object {
-        private const val APP_PREFERENCES = "app_preferences"
-        private const val THEME_KEY = "dark_theme"
-    }
-
     override fun onCreate() {
         super.onCreate()
+        Creator.init(this)
 
-        val sharedPrefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
-        darkTheme = sharedPrefs.getBoolean(THEME_KEY, false)
+        darkTheme = Creator.provideGetThemeSettingsInteractor().execute()
         switchTheme(darkTheme)
     }
 
     fun switchTheme(darkThemeEnabled: Boolean) {
         darkTheme = darkThemeEnabled
-
-        val sharedPrefs = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE)
-        sharedPrefs.edit()
-            .putBoolean(THEME_KEY, darkThemeEnabled)
-            .apply()
-
+        Creator.provideSaveThemeSettingsInteractor().execute(darkThemeEnabled)
         AppCompatDelegate.setDefaultNightMode(
             if (darkThemeEnabled) {
                 AppCompatDelegate.MODE_NIGHT_YES

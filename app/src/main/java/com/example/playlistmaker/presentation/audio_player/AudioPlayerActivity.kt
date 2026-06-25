@@ -1,4 +1,4 @@
-package com.example.playlistmaker
+package com.example.playlistmaker.presentation.audio_player
 
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
+import com.example.playlistmaker.Creator
+import com.example.playlistmaker.R
+import com.example.playlistmaker.domain.models.Track
 import com.google.android.material.appbar.MaterialToolbar
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -18,7 +21,7 @@ import java.util.Locale
 class AudioPlayerActivity : AppCompatActivity() {
 
     companion object {
-        const val TRACK_KEY = "track"
+        const val TRACK_ID_KEY = "track_id"
     }
 
     private lateinit var toolbar: MaterialToolbar
@@ -40,6 +43,8 @@ class AudioPlayerActivity : AppCompatActivity() {
     private var isPlaying = false
     private var currentTrack: Track? = null
 
+    private val getSearchHistoryInteractor by lazy { Creator.provideGetSearchHistoryInteractor() }
+
     private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
 
     private val updateTimeRunnable = object : Runnable {
@@ -59,6 +64,12 @@ class AudioPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio_player)
 
+        initViews()
+        setupListeners()
+        loadTrack()
+    }
+
+    private fun initViews() {
         toolbar = findViewById(R.id.toolbar)
         coverImageView = findViewById(R.id.coverImageView)
         trackNameTextView = findViewById(R.id.trackNameTextView)
@@ -72,7 +83,9 @@ class AudioPlayerActivity : AppCompatActivity() {
         countryTextView = findViewById(R.id.countryTextView)
         currentTimeTextView = findViewById(R.id.currentTimeTextView)
         playButton = findViewById(R.id.playButton)
+    }
 
+    private fun setupListeners() {
         toolbar.setNavigationOnClickListener {
             releaseMediaPlayer()
             finish()
@@ -81,19 +94,17 @@ class AudioPlayerActivity : AppCompatActivity() {
         playButton.setOnClickListener {
             togglePlayback()
         }
+    }
 
-        val track =
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                intent.getParcelableExtra(TRACK_KEY, Track::class.java)
-            } else {
-                @Suppress("DEPRECATION")
-                intent.getParcelableExtra(TRACK_KEY)
+    private fun loadTrack() {
+        val trackId = intent.getIntExtra(TRACK_ID_KEY, -1)
+        if (trackId != -1) {
+            val track = getSearchHistoryInteractor.execute().find { it.trackId == trackId }
+            if (track != null) {
+                currentTrack = track
+                displayTrackInfo(track)
+                setupMediaPlayer(track.previewUrl)
             }
-
-        currentTrack = track
-        if (track != null) {
-            displayTrackInfo(track)
-            setupMediaPlayer(track.previewUrl)
         }
     }
 
